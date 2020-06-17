@@ -1,0 +1,31 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{minted}
+\usemintedstyle{borland}
+
+\begin{document}
+
+\begin{minted}{python}
+import numpy as np
+#import matplotlib.pyplot as plt
+
+m1 = float(input("Choisir la masse de la première boule (en kg) : "))
+m2 = float(input("Choisir la masse de la deuxième boule (en kg): "))
+u1 = float(input("Choisir la vitesse initiale de la première boule (en m/s) : "))
+v1 = float(input("Choisir la vitesse intitiale de la deuxième boule (en m/s) : "))
+
+gauche = np.array([[m1,m2],[1,-1]])
+droite = np.array([m1*u1 + m2*v1, v1-u1])
+
+soln = np.linalg.solve(gauche, droite)
+
+
+u2 = soln[0]
+v2 = soln[1]
+
+print('u2 = ', u2)
+print('v2 = ', v2)
+\end{minted}
+
+
+\end{document}

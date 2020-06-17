@@ -1,0 +1,468 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+\usepackage[left=1.8cm,right=1.8cm,top=2cm,bottom=1.5cm]{geometry}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,varioref,times}
+\usepackage{gensymb}
+\usepackage{lipsum}
+
+%enumerate pacakge 
+\usepackage{enumerate}
+
+%pour ecrire en français avec les accents
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+\usepackage{pifont}
+
+% Divers ...
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage{fancybox}
+\usepackage{frcursive}
+\usepackage{pstricks,pstricks-add, pst-plot}
+\usepackage[crop=off]{auto-pst-pdf}
+%pour les entêtes et pieds de pages
+\usepackage{layout}
+
+
+
+%Image-related packages
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{wrapfig}
+
+%pour les maths
+\usepackage{amsmath,amsfonts,amssymb}
+
+%pour faire des cadres
+\usepackage{framed}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+
+% parametres des entete et de pieds de pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Exercices : Analyse vectorielle}
+\rhead{Physique : Terminale}
+\rfoot{Page \thepage}
+
+
+% pour ecrire sur +sieurs colonnes
+\usepackage{multicol}
+% \setlength{\columnseprule}{0.25pt}
+\setlength{\columnsep}{60pt}
+
+% Fusion de lignes de tableaux.
+\usepackage{multirow}
+% Position verticale des lettres dans la ligne de tableau.
+\usepackage{array}
+
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\mps}{m\cdot s^{-1}}
+\newcommand{\mpss}{m\cdot s^{-2}}
+%repère
+\newcommand{\oij} % (\text{O} \, ; \vec{\imath}, \, ,\vec{\jmath}$}
+
+
+\begin{document}
+\title{Exercices : Vecteurs}
+\date{}
+\maketitle
+
+\section{Decomposition vectorielle}
+
+\subsection*{Déterminer les force ou l'angle qui manquent : }
+
+\begin{multicols}{2}
+    \begin{enumerate}[i]
+        \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-1, 0) -- (2,0) node (xaxis) [right] {$x$};
+    \draw [->, thick] (0,0) -- (1.5,1.5) ;
+    \draw [->, ultra thick] (0,0) -- (1.5,0) ; 
+    \draw (1,0) node [below]{$\vec{F_x}$} ;
+    \draw [->, ultra thick] (0,0) -- (0,1.5) ; 
+    \draw (0,1) node [left]{$\vec{F_y}$} ; 
+    \draw (1, 1) node [above, rotate=45]{$\Vec{F}=10 N$} ;
+    \draw (0.5,0) arc (0:45:0.5) ;
+    \draw (20:1.2) node {$\theta=30\degree$};
+    \node[draw,text width=1.5cm] at (3,1) { $\vec{F_x} = $ \\ $\Vec{F_y}=$ } ;
+    \end{tikzpicture}
+
+        \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (1,0) node (xaxis) [left] {$x$};
+    \draw [->, thick] (0,0) -- (-1.5,1.5) ;
+    \draw [->, ultra thick] (0,0) -- (-1.5,0) ; 
+    \draw (-1,0) node [below]{$\vec{F_x}$} ;
+    \draw [->, ultra thick] (0,0) -- (0,1.5) ; 
+    \draw (0,1) node [right]{$\vec{F_y}$} ; 
+    \draw (-1, 1) node [above, rotate=-45]{$\Vec{F}=20 N$} ;
+    \draw (-0.25,0.25) arc (135:180:0.3) ;
+    \draw (160:1) node {$\theta=60\degree$};
+    \node[draw,text width=1.5cm] at (2,1) {$\vec{F_x} = \quad $\\ $\vec{F_y}=$};
+
+    
+\end{tikzpicture}
+        \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-1, 0) -- (2,0) node (xaxis) [right] {$x$};
+    \draw [->, thick] (0,0) -- (1.5,1.5) ;
+    \draw [->, ultra thick] (0,0) -- (1.5,0) ; 
+    \draw (1,0) node [below]{$\vec{F_x}=5N $} ;
+    \draw [->, ultra thick] (0,0) -- (0,1.5) ; 
+    \draw (0,1) node [left]{$\vec{F_y}$} ; 
+    \draw (1, 1) node [above, rotate=45]{$\Vec{F}$} ;
+    \draw (0.5,0) arc (0:45:0.5) ;
+    \draw (20:1.2) node {$\theta=45\degree$};
+    \node[draw,text width=1.5cm] at (3,1) {$\vec{F} = $\\ $\vec{F_y}=$};
+    \end{tikzpicture}
+
+        \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,1) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (1,0) node (xaxis) [right] {$x$};
+    \draw [->, thick] (0,0) -- (-1.5,-1.5) ;
+    \draw [->, ultra thick] (0,0) -- (-1.5,0) ; 
+    \draw (-1,0) node [above]{$\vec{F_x}$} ;
+    \draw [->, ultra thick] (0,0) -- (0,-1.5) ; 
+    \draw (0,-1) node [right]{$\vec{F_y}=10N$} ; 
+    \draw (-0.25,-.25) arc (235:270:0.45) ;
+    \draw (290:0.5) node {$\theta=66\degree$};
+    \node[draw,text width=1.5cm] at (1.5,1) {$\Vec{F_x} = $\\ $\Vec{F}= $};
+\end{tikzpicture}    
+
+ \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-1, 0) -- (2,0) node (xaxis) [right] {$x$};
+    \draw [->, thick] (0,0) -- (1,1.5) ;
+    \draw [->, ultra thick] (0,0) -- (1,0) ; 
+    \draw (1,0) node [below]{$\vec{F_x}=10$} ;
+    \draw [->, ultra thick] (0,0) -- (0,1.5) ; 
+    \draw (0,1) node [left]{$\vec{F_y}=15N$} ; 
+    \draw (0.5, 1) node [above, rotate=55]{$\Vec{F}$} ;
+    \draw (0.5,0) arc (0:55:0.5) ;
+    \draw (22.5:1) node {$\theta$};
+    \node[draw,text width=1.5cm] at (2.5, 1) { $\Vec{F} = $ \\ $\theta=$ } ;
+    \end{tikzpicture}
+
+        \item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (1,0) node (xaxis) [left] {$x$};
+    \draw [->, thick] (0,0) -- (-1,1.5) ;
+    \draw [->, ultra thick] (0,0) -- (-1,0) ; 
+    \draw (-0.75,0) node [below]{$\vec{F_x}=20N$} ;
+    \draw [->, ultra thick] (0,0) -- (0,1.5) ; 
+    \draw (0,1) node [right]{$\vec{F_y}$} ; 
+    \draw (-0.75, 1.25) node [above, rotate=-55]{$\Vec{F}=100 N$} ;
+    \draw (150:0.5) node {$\theta$};
+    \node[draw,text width=1.5cm] at (2,1) {$\theta = $ \\ $\vec{F_y}=$};
+\end{tikzpicture}    
+
+    \end{enumerate}
+
+\end{multicols}
+
+\newpage
+
+\section{Addition vectorielle.}
+\subsection*{Caractériser le vecteur-force résultante.}
+\begin{multicols}{2}
+\begin{enumerate}[i]
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-1, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.5,0) ; 
+    \draw (1,0) node [below]{$\vec{F_1}=10N$} ;
+    \draw [->, ultra thick] (1.5,0) -- (1.5,2) ; 
+    \draw (1.5,1) node [right]{$\vec{F_2}=25N$} ; 
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-1) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.5,1) ; 
+    \draw (1.5, 1) node [above]{$\Vec{F_1}=10N$} ;
+    \draw [->, ultra thick] ((0,0) -- (-1,1.5) ; 
+    \draw (-1,1.5) node [above]{$\vec{F_2}=10N$} ; 
+    \draw (0.5, 0.2) node [right]{$30\degree$} ;
+    \draw (-0.85, 0.2) node [right]{$60\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.5,1.5) ; 
+    \draw (1.5, 1.5) node [above]{$\Vec{F_1}=15N$} ;
+    \draw [->, ultra thick] ((0,0) -- (-2,0) ; 
+    \draw (-1.5,0.5) node [above]{$\vec{F_2}=20N$} ;
+    \draw [->, ultra thick] ((0,0) -- (1.5,-1) ; 
+    \draw (1.5,-1) node [below]{$\vec{F_3}=20N$} ;
+    \draw (0.5, 0.25) node [right]{$45\degree$} ;
+    \draw (0.5, -0.25) node [right]{$60\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.5,1) ; 
+    \draw (2, 1) node [above]{$\Vec{F_1}=100N$} ;
+    \draw (0.5, 0.25) node [right]{$33\degree$} ;
+
+    \draw [->, ultra thick] ((0,0) -- (-1.5,-1.5) ; 
+    \draw (-1.5, -1.5) node [below]{$\vec{F_2}=50N$} ;
+    \draw (-0.5, -0.25) node [left]{$50\degree$} ;
+    
+    \draw [->, ultra thick] ((0,0) -- (1.5,2) ; 
+    \draw (1,2) node [above]{$\vec{F_3}=200N$} ;
+    \draw (0.25,0.75) node [above]{$60\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1,1.5) ; 
+    \draw (1,1.5) node [above]{$\Vec{F_1}=10N$} ;
+    \draw (0.25, 0.55) node [above]{$30\degree$} ;
+
+    \draw [->, ultra thick] ((0,0) -- (-1.5,-0.5) ; 
+    \draw (-1.5,-0.35) node [below]{$\vec{F_2}=10N$} ;
+    \draw (-1, -0.25) node [left]{$10\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (1,-1.5) ; 
+    \draw (1,-1.5) node [below]{$\vec{F_3}=10N$} ;
+    \draw (0.5,-0.35) node [right]{$30\degree$} ;
+
+    \draw [->, ultra thick] (0,0) -- (2,0) ; 
+    \draw (1,0.25) node [right]{$\vec{F_4}=10N$} ;
+    \draw (0.5,-0.25) node [right]{} ;
+    
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-3) -- (0,0.25) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-0.25, 0) -- (3.5,0) node (xaxis) [above] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (0.75,-1.5) ; 
+    \draw (0.5,-0.75) node [left]{$\Vec{F_1}=20N$} ;
+    \draw (0.25, -0.25) node [right]{$60\degree$} ;
+
+    \draw [->, ultra thick] (0.75,-1.5) -- (2,-2) ; 
+    \draw (2,-2.25) node [right]{$\vec{F_2}=20N$} ;
+    
+    \draw [->, ultra thick] (2,-2) -- (3,-1) ; 
+    \draw (2.5,-0.5) node [right]{$\vec{F_3}=15N$} ;
+
+    \draw [dotted, thick] (0.75,-2.5) -- (0.75,-1) ;
+    \draw (0.8, -2) node [right]{$60\degree$};
+    \draw [dotted, thick] (2, -2) -- (3.5, -2) ;
+    \draw (2.35, -1.75) node [right]{$30\degree$}
+    
+    \end{tikzpicture}
+
+\end{enumerate}    
+\end{multicols}
+
+\newpage
+
+\section{Addition vectorielle.}
+\subsection*{Caractériser le vecteur-force $F$ qui donnerait une somme vectorielle nulle.}
+\begin{multicols}{2}
+\begin{enumerate}[i]
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.75,1) ; 
+    \draw (1.5,1.25) node [above]{$\Vec{F_1}=10N$} ;
+    \draw (0.5, 0.25) node [right]{$20\degree$} ;
+
+    \draw [->, ultra thick] (0,0) -- (-1,-1.5) ; 
+    \draw (-1,-1.5) node [below]{$\vec{F_2}=20N$} ;
+    \draw (-.25, -0.5) node [below]{$20\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (-1,1) ; 
+    \draw (-0.35,1.25) node [left]{$\vec{F}=$} ;
+    %\draw (0.5,-0.35) node [right]{$30\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.75,1) ; 
+    \draw (1.5,1.25) node [above]{$\Vec{F_1}=25N$} ;
+    \draw (0.55, 0.25) node [right]{$25\degree$} ;
+
+    \draw [->, ultra thick] (0,0) -- (0,-1.5) ; 
+    \draw (0,-1.5) node [right]{$\vec{F}$} ;
+    % \draw (-.25, -0.5) node [below]{$20\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (-1.5,1.5) ; 
+    \draw (-1.5, 1.5) node [above]{$\vec{F_2}=30$} ;
+    \draw (-0.35, 0.25) node [left]{$45\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (1.5,0) ; 
+    \draw (1,0.35) node [right]{$\Vec{F_2}=100N$} ;
+    %\draw (0.55, 0.25) node [right]{$25\degree$} ;
+
+    \draw [->, ultra thick] (0,0) -- (0,-1.5) ; 
+    \draw (0,-1.5) node [right]{$\vec{F}$} ;
+    %\draw (-.25, -0.5) node [below]{$20\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (-1.5,1) ; 
+    \draw (-1.5, 1) node [above]{$\vec{F_1}=30N$} ;
+    \draw (-0.5, 0.25) node [left]{$30\degree$} ;
+
+    \end{tikzpicture}
+
+\item \begin{tikzpicture}[scale=1.3]
+    % Draw axes
+    \draw [<->] (0,-2) -- (0,2) node (yaxis) [above] {$y$} ;
+    \draw [<->] (-2, 0) -- (2,0) node (xaxis) [right] {$x$};
+    % Draw vectors    
+    \draw [->, ultra thick] (0,0) -- (2,0.75) ; 
+    \draw (1.75,1) node [right]{$\Vec{F_1}=10N$} ;
+    \draw (0.8, 0.2) node [right]{$15\degree$} ;
+
+    \draw [->, ultra thick] (0,0) -- (-0.5,-1.5) ; 
+    \draw (-0.5,-1.5) node [below]{$\vec{F}$} ;
+    % \draw (-.25, -0.5) node [below]{$20\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (-1,1.5) ; 
+    \draw (-1, 1.5) node [above]{$\vec{F_2}=10$} ;
+    \draw (-0.25, 0.25) node [left]{$60\degree$} ;
+    
+    \draw [->, ultra thick] (0,0) -- (0.75,2) ; 
+    \draw (0.75,2) node [right]{$\Vec{F_3}=10N$} ;
+    \draw (0.25,1) node [above]{$15\degree$} ;
+
+    \end{tikzpicture}
+
+\end{enumerate}
+\end{multicols}
+
+\newpage
+
+\section{Avec un repère "incliné"}
+\subsection*{Déterminer la somme des vecteurs et, si nécessaire, caractériser la force nécessaire pour équilibrer l'ensemble.}
+
+\begin{enumerate}[i]
+    \item 
+    \begin{center}
+       \begin{tikzpicture}[scale=1.3]
+    % draw inclined plane
+    \draw  (0,0) -- (7,0) ;
+    \draw  (2,0) -- (6,2) ; 
+    \draw (2.5, 0.15) node [right]{$\theta = 30\degree$} ;
+    \draw (2,0) node [below]{$A$} ;
+    
+    %forces
+    \draw [->, ultra thick] (4, 1.25) -- (4, -0.5) ; 
+    \draw (4,-0.5) node [below]{$\Vec{F_g}=50N$} ;
+    
+    \draw [->, ultra thick] (4, 1.25) -- (5, 1.75) ; 
+    \draw (4.75, 1.75) node [above, rotate=30] {$\Vec{F_f}=10N$} ; 
+   
+    \draw [->, ultra thick] (4, 1.25) -- (3.35, 2.5) ; 
+    \draw (3.35, 2.5) node [above]{$\Vec{F_N}=40$} ; 
+    
+    \coordinate (O) at (4, 1.25) {}; 
+    %base
+    \coordinate (B) at (3.35, 2.5) {}; 
+    \coordinate (C) at (5, 1.75) {}; 
+    
+    \tkzMarkRightAngle[draw=black, size=.2](B,O,C) ;
+    
+    
+    \end{tikzpicture}
+    \end{center}
+
+    \item 
+    \begin{center}
+       \begin{tikzpicture}[scale=1.3]
+    % draw inclined plane
+    \draw  (0,0) -- (7,0) ;
+    \draw  (2,0) -- (6,2) ; 
+    \draw (2.5, 0.15) node [right]{$\theta = 30\degree$} ;
+    \draw (2,0) node [below]{$A$} ;
+    
+    %forces
+    \draw [->, ultra thick] (4, 1) -- (4, -0.5) ; 
+    \draw (4,-0.5) node [below]{$\Vec{F_g}=30N$} ;
+    
+    \draw [->, ultra thick] (4, 1) -- (5.5, 3) ; 
+    \draw (5.5, 3) node [above] {$\Vec{F_1}=50N$} ; 
+    \draw (4.5, 1.5) node [right, rotate=27] {$\theta=30$} ;
+   
+    \draw [->, ultra thick] (4, 1) -- (3.25, 2.5) ; 
+    \draw (3.25, 2.5) node [above]{$\Vec{F_N}=20N$} ; 
+    
+    \draw [->, ultra thick] (4, 1) -- (3, 0.5) ; 
+    \draw (3, 0.6) node [above, rotate=27]{$\Vec{F_2}=10N$} ;
+    
+    
+    
+    
+    \coordinate (O) at (4, 1) {}; 
+    \coordinate (B) at (3.25, 2.5) {}; 
+    \coordinate (A) at (2,0) {}; 
+    
+    \tkzMarkRightAngle[draw=black, size=.2](A,O,B) ;
+    
+    
+    \end{tikzpicture}
+    \end{center}
+   
+ 
+    
+    
+\end{enumerate}
+
+
+
+
+\end{document}

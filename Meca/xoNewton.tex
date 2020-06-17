@@ -1,0 +1,371 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2.5cm]{geometry}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,varioref,times}
+\usepackage{gensymb}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\usepackage{xhfill}
+
+%to resume numbering in a list
+\usepackage{enumitem}
+
+%pour ecrire en français avec les accents
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+\usepackage{units}
+
+%Image-related packages
+\usepackage{wrapfig}
+\usepackage{float, graphicx}
+\graphicspath{ {./img/} }
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+
+
+%pour faire des cadres
+\usepackage{framed}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+%chemistry frmulae
+\usepackage{chemfig}
+\usepackage{chemformula}
+ 
+
+% parametres des entete et de pieds de pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{SciPhy : Terminale spécialité}
+\lhead{Exos : Mécanique Newtonienne}
+\chead{2019-2027}
+\rfoot{Page \thepage}
+\lfoot{S Zayyani}
+
+
+% pour ecrire sur +sieurs colonnes
+\usepackage{multicol}
+\setlength{\columnseprule}{0.25pt}
+\setlength{\columnsep}{60pt}
+
+% Fusion de lignes de tableaux.
+\usepackage{multirow}
+
+% Position verticale des lettres dans la ligne de tableau.
+\usepackage{array}
+
+
+% MATH -----------------------------------------------------------
+\newcommand{\To}{\longrightarrow}
+\newcommand{\gpl}{\; g\cdot L^{-1}}
+\newcommand{\gpmol}{\; g\cdot mol^{-1}}
+\newcommand{\mpl}{\; mol\cdot L^{-1}}
+\newcommand{\mps}{\; m\cdot s^{-1}}
+\newcommand{\mpss}{\; m\cdot s^{-2}}
+\newcommand{\es}[1]{\cdot10^{#1}}
+\newcommand{\eng}[1]{\textcolor{purple}{= #1}}
+\newenvironment{eg}
+ {\begin{shaded} \textbf{Exemples:} } { \end{shaded}}
+
+\newcounter{exo}
+\newenvironment{exo}
+ {\refstepcounter{exo} \begin{shaded}\noindent $\triangleright \quad$\textbf{Exercice: } } { \end{shaded}}    
+
+\newenvironment{defn}[1]
+ {\begin{leftbar}\noindent \textbf{Définition :\textit{ \quad #1} } } { \end{leftbar}} 
+ 
+\newenvironment{python}
+ {\begin{shaded} \textbf{A faire en PYTHON}\\ \itshape } { \end{shaded}}
+
+ \usepackage[explicit]{titlesec}
+    % Raised Rule Command:
+    % Arg 1 (Optional) - How high to raise the rule
+    % Arg 2 - Thickness of the rule
+    \newcommand{\raisedrulefill}[2][0ex]{\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+    \titleformat{\section}{\Large\bfseries}{\thesection. }{0em}{#1\,\raisedrulefill[0.4ex]{2pt}}
+
+
+
+\definecolor{shadecolor}{gray}{0.9}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{2mm}
+
+\begin{document}
+
+\title{Exercices de mécanique newtonienne \\ {\small{(avec du PYTHON)}}}
+\date{}
+\maketitle
+\vspace{-1cm}
+
+\noindent
+\xrfill[0.7ex]{1pt} \quad Conservation de quantité de mouvement \quad \xrfill[0.7ex]{1pt}
+
+
+\section{Choc entre deux boules}
+Nous allons étudier quelques chocs entres objets afin de mettre en oeuvre le principe de la conservation de la quantité de mouvement. 
+\\
+Nous allons considérer deux balles de masse $m_1$ situé à gauche sur le point $A$ et $m_2$ situé à droite sur le point $B$.
+
+Déterminer le vecteur vitesse $\vec{v_2}'$, de la balle $2$ \textit{après} le choc. 
+
+\textit{Données : $m_1=2,0\; kg$, $m_2=1,0\; kg$; $v_1=5,0\; \mps$}
+\begin{enumerate}
+    \item Cas I : $m_1$ se déplace vers $m_2$ avec une vitesse initiale $v_1$, et puis \textit{recule} après le choc avec une vitesse $v_1'=2,0 \; \mps$. 
+    \item Cas II : $m_1$ se déplace vers $m_2$ avec une vitesse initiale $v_1$, et puis \textit{avance} après le choc avec une vitesse $v_1'=2,0 \; \mps$.
+    \item Cas III : $m_1$ se déplace vers $m_2$ avec une vitesse initiale $v_1$, et puis reste immobile après le choc avec une vitesse.
+    \item Cas IV : $m_1$ se déplace vers $m_2$ avec une vitesse initiale $v_1$, et puis le deux boules restent \textit{collées en avançant} après le choc. Déterminer la vitesse $v_3'$ de l'ensemble collé.
+\end{enumerate}
+
+\begin{python}
+Développer un code pour déterminer chacune des réponse aux questions précédentes. Votre programme doit demander à l'utilisateur d'entrer les valeurs de la masse de chacune des boules, ainsi que leur vitesse initiale. 
+\end{python}
+
+\section{Une pierre dans un bateau}
+Lilou est assise dans un canoë au milieu d’un lac. Le canoë est immobile et Lilou, qui a perdu sa pagaie, souhaite regagner la rive avec son embarcation.
+
+Elle ne dispose alors que d’une pierre présente dans son canoë. Se rappelant de ses cours de Terminale, elle décide de la jeter par dessus bord, horizontalement vers l’arrière de l’embarcation.
+
+On définit le système $(S)$, constitué de Lilou $(L)$, du canoë $(C)$ et de la pierre $(P)$. 
+
+\textit{Données : $m_L=55 \; kg$ , $m_c=30 \; kg$ , $m_L=2,5 \; kg$ , $v_P=2,0  \; \mps$}
+On néglige les frottement de l'air et de l'eau. 
+\begin{enumerate}
+    \item Sans justifier, indiquer ce qui va se passer après le lancer
+    \item Avant le lancer, le système $(S)$ est-il isolé ou pseudo-isolé?
+    \item Quel est le vecteur quantité de mouvement avant le lancer la pierre?
+    \item Exprimer puis calculer la valeur de la vitesse $v$ du canoë (avec  Lilou) après le lancer.
+    \item Dans quel sens se déplace le canoë après le lancer.
+    \item Quelle est alors la nature du mouvement du canoë? Est-ce cohérent avec une situation réelle? Justifier.
+
+\end{enumerate}
+
+\section{Recul d'un fusil}
+
+Un fusil pèse $7,0 \; kg$, alors qu’une balle a une masse de $500 \; g$. Si la vitesse de la balle au moment de sa sortie du fusil est $400 \; \mps$ , quelle est le vecteur-vitesse du recul du fusil? 
+
+
+\section{Collision entre deux voitures (en deux dimensions)}
+
+Un camion de masse $m_c=10 \; tonnes$ roule du l'est vers l'ouest avec une vitesse de $v_c=100 \; km/h$. 
+Une voiture de masse $m_v=1500 \; kg$ roule du sud vers le nord avec une vitesse $v_v=130\; km/h$. 
+\textit{Nous pouvons représenter l'axe nord-sud par $l'axe-y$, et l'axe est-ouest par $l'axe-x$.}
+Les deux véhicules entrent en collisions au point $O$, l'origine de notre repère. 
+Déterminer le vecteur vitesse $\vec{v_3}$ de cet amas après la collision, autrement dit déterminer dans quels direction et sens part-il en précisant sa vitesse et sa direction (angle) par rapport aux axes du repère. 
+
+\begin{python}
+Ecrire un code pour déterminer la réponse numérique à la question. Votre programme doit demander à l'utilisateur d'entrer la vitesse initiale ainsi que la masse de chacun des deux véhicules au début. \end{python}
+
+\section{Une bombe qui explose en trois morceaux}
+Un bombe de masse $m=10,0\; kg$ situation à l'origine $O$ d'un repère cartésien explose à l'instant $t_0$.    
+Un morceau de masse $m_1=3,0 \; kg$ part à droite le long de l'axe $x$ à une vitesse de $v_1=30\; \mps$. 
+Un deuxième morceau de masse $m_2 = 5,0 \; kg$ part avec une vitesse $v_2=25\mps$ dans une direction qui fait $\alpha=120\degree$ avec $Ox$. 
+Déterminer le vecteur vitesse $\vec{v_3}$ du troisième morceau après l'explosion. 
+\vspace{1cm}
+
+\newpage
+
+\noindent
+\xrfill[0.7ex]{1pt} \quad Lois de Newton : mouvement projectile \quad \xrfill[0.7ex]{1pt}
+
+\section{Chute libre sans vitesse initiale}
+Considérer une balle de masse $m$ situé à une hauteur $h$ par rapport au sol. 
+\begin{enumerate}
+    \item Déterminer à quel instant $t_1$ la balle touche le sol.
+    \item Déterminer l'expression de la vitesse de la balle en fonction de sa position, c'est à dire $v=f(x)$ avec $x$ la coordonnée de position lors de ce mouvement uni-dimensionnel. 
+    \item Déterminer l'expression de la hauteur depuis laquelle on doit lâcher la baller afin qu'elle possède une vitesse $v_s$ au moment du contact avec le sol. 
+    \item Déterminer la valeur numérique de la vitesse $v_s$ pour une $h_1=2,0\;  m$
+    \item Déterminer la hauteur $h_0$ d'où on doit lâcher la balle pour une vitesse au sol $v_s = 10,0 \; \mps$
+\end{enumerate}
+
+\begin{python}
+Ecrire un code pour déterminer chacune des réponse aux questions précédentes en demandant à l'utilisateur. 
+Votre programme doit afficher la réponse à chaque question en une seule fois à la fin. 
+\end{python}
+
+\section{Chute libre avec vitesse initiale vers le bas}
+Considérer une balle de masse $m$ situé à une hauteur $h$ par rapport au sol (même situation qu'avant) mais avec une vitesse initiale de $v_0$ dirigée vers le bas. 
+\begin{enumerate}
+    \item Déterminer à quel instant $t_1$ la balle touche le sol.
+    \item Déterminer l'expression de la vitesse de la balle en fonction de sa position, c'est à dire $v=f(x)$ avec $x$ la coordonnée de position lors de ce mouvement uni-dimensionnel. 
+    \item Déterminer l'expression de la hauteur depuis laquelle on doit lâcher la baller afin qu'elle possède une vitesse $v_s$ au moment du contact avec le sol. 
+    \item Déterminer la valeur numérique de la vitesse $v_s$ pour une $h_1=2,0\; et \; v_0=5,0 \; \mps $
+    \item Déterminer la hauteur $h_0$ d'où on doit lâcher la balle pour une vitesse au sol $v_s = 10,0 \; \mps$. Et pour une vitesse au sol $v_s'=4,0\; \mps$
+\end{enumerate}
+
+\section{Chute libre avec vitesse initiale vers le haut}
+Considérer une balle de masse $m$ situé à une hauteur $h$ par rapport au sol (même situation que dans l'exo 2) mais avec une vitesse initiale de $v_0$ dirigée vers le \textit{haut}. 
+\begin{enumerate}
+    \item Déterminer à quel instant $t_1$ la balle touche le sol.
+    \item Déterminer l'expression de la vitesse de la balle en fonction de sa position, c'est à dire $v=f(x)$ avec $x$ la coordonnée de position lors de ce mouvement uni-dimensionnel. 
+    \item Déterminer l'expression de la hauteur depuis laquelle on doit lâcher la baller afin qu'elle possède une vitesse $v_s$ au moment du contact avec le sol. 
+    \item Déterminer la valeur numérique de la vitesse $v_s$ pour une $h_1=2,0\; et \; v_0=5,0 \; \mps $
+    \item Déterminer la hauteur $h_0$ d'où on doit lâcher la balle pour une vitesse au sol $v_s = 10,0 \; \mps$. Et pour une vitesse au sol $v_s'=4,0\; \mps$
+\end{enumerate}
+
+\begin{python}
+En vous servant du code de l'exercice 6, écrire un code pour déterminer chacune des réponse aux questions précédentes en demandant à l'utilisateur de donner les valeur initiale de la hauteur et du vecteur vitesse (i.e. la norme et un angle par rapport à l'horizontale). Bien sur le signe de la norme du vecteur vitesse initiale détermine s'il est vers le haut ou vers le bas. 
+Votre programme doit afficher la réponse aux questions 1 et 4, en une seule fois à la fin. 
+\end{python}
+
+\section{Une sphère en haut d'une pente}
+
+Considérons maintenant une pente inclinée qui fait un angle $\theta_0$ avec l'horizontale. La balle est initialement situé en haut de la pente au point $A$ à une distance $d$ du point $B$ en bas de la pente. On néglige toute force de résistance pour l'instant. Prenons les valeurs numériques suivantes : $v_A=2,0\; \mps $, $d=10,0\; m$, $\theta=30\degree $, $g=10,0 \; \mpss$, 
+\begin{enumerate}
+    \item Pour une balle lâchée à un instant $t_0$ déterminer la vitesse $v_B$ de la balle au point $B$. 
+    \item Déterminer la vitesse $v_B$ si la balle au point $A$ possède une vitesse $v_A$ vers le bas.
+    \item Déterminer sa valeur numérique de $v_B$. 
+    \item Déterminer la vitesse $v_B'$ si la balle au point $A$ possède une vitesse $v_A$ vers le haut.
+    \item Déterminer la valeur numérique de $v_B '$.
+    
+\end{enumerate}
+\section{Une sphère en haut d'une pente}
+
+Considérons la même pente que dans IV. La seule différence est que nous avons la hauteur du point $A$ au lieu de la distance $AB$. Le point $A$, le sommet de la pente, est situé à une hauteur de $h$. Prenons les valeurs numériques suivantes : $v_A=2,0\; \mps $, $h=2,0 \; m$, $\theta=30\degree$, $g=10,0 \; \mpss$, 
+\begin{enumerate}
+    \item Déterminer l'expression de la vitesse en bas de la pente au point $B$ en fonction de la hauteur $h$, c'est à dire $v_B=f(h)$. 
+    \item Déterminer l'expression de la vitesse $v_B$ en termes de la hauteur $h$ et la vitesse initiale $v_A$. 
+    
+\end{enumerate}
+
+\section{Une sphère qui monte une pente}
+Considérons la même pente que dans l'exercice précédent. Nous allons se poser la question inverse. 
+\begin{enumerate}
+    \item Déterminer la vitesse minimum $v_B$ que doit posséder la balle en bas de la pente au point $B$ afin d'arriver et de s'arrêter au point $A$ en haut de la pente.  
+    \item En utilisant les mêmes valeurs numériques qu'avant, déterminer la valeur numérique de $v_B$.
+\end{enumerate}
+
+\section{Un cube sur une pente avec du frottement}
+Nous allons introduire la notion de frottement (une force qui résiste au mouvement, ici en raison du contact physique entre la surface de la pente et la surface de l'objet glissant sur la pente).
+Considérons la même pente que dans les exercices précédents. Afin d'inclure la force de frottement, l'objet n'est plus une sphère, mais plutôt un cube, de masse $m$. 
+Reprenons la démarche de l'exercice IV. La balle est initialement immobile en haut de la pente, au point $A$. Supposons, pour simplicité, que le cube subit une force de frottement \textit{constante} de $F_f$. Prenons les valeurs numériques suivantes : $v_A=2,0\; \mps $, $h=2,0 \; m$, $\theta=30\degree$, $g=10,0 \; \mpss$, $F_f=5,0\; N$ 
+
+\begin{enumerate}
+    \item Déterminer la vitesse minimum $v_B$ que doit posséder la balle en bas de la pente au point $B$ afin d'arriver et de s'arrêter au point $A$ en haut de la pente.  
+    \item En utilisant les mêmes valeurs numériques qu'avant, déterminer la valeur numérique de $v_B$.
+    \item Si la vitesse du cube au point b est $v_B$, déterminer l'expression littérale de la force de frottement $F_f$. 
+    \item Déterminer la valeur numérique de $F_f$.
+\end{enumerate}
+
+\section{Frottement, un freinage naturel}
+
+Continuons avec la situation précédente d'un cube, initialement immobile en haut d'une pente, avec un frottement constant. 
+La pente est connectée à une surface horizontale. Une fois lâché le cube descend la pente jusqu'au point $B$ et puis continu sur la surface horizontale jusqu'au point $C$ où il s'arrête. 
+
+\begin{enumerate}
+    \item Si la force de frottement $F_f$ est constante le long du trajet du cube et déterminer la position du point $C$.
+    \item En utilisant les mêmes valeurs numériques qu'avant, et $F_f=5,0\; N$, déterminer la valeur numérique de la distance $BC$. 
+    \item Supposons que le cube s'arrête au point $C$ situé à une distance $\ell$ du point $B$ sur la surface horizontale. Déterminer alors l'expression de la force de frottement $F_f$. 
+    \item En prenant $\ell=10,0\; m$ déterminer la valeur numérique de $F_f$. 
+\end{enumerate}
+
+\section{Coup franc horizontal d'un ballon au bord d'une falaise}
+Passons maintenant à un problème en deux dimensions. 
+Considérons un ballon de foot; situé au bord d'une falais, au point $A$. La falaise a une hauteur de $h$ par rapport à la mer. 
+On donne un coup \textit{horizontal} au ballon immobile, lui donnant alors une vitesse initial de $v_A$. Le ballon tombe dans la mer au point $B$. Prenons les valeurs numériques suivantes : $v_A=7,0\; \mps $, $h=100,0 \; m$, $g=10,0 \; \mpss$.  
+\begin{enumerate}
+    \item Déterminer la durée $t$ du vol du ballon avant qu'il touche la mer. 
+    \item Déterminer à quelle distance $d$ par rapport au pied des falaise le ballon touchera l'eau. 
+    \item Déterminer la vitesse $v_B$ du ballon à l'instant $t_B$ juste avant de toucher l'eau.
+    \item Déterminer les valeurs numérique de $t$, $d$, $v_B$. 
+\end{enumerate}
+
+\section{Coup franc avec un angle au bord d'une falaise}
+Nous allons reprendre la situation précédente, avec une seule modification : le coup franc n'est plus horizontal, mais il s'agit d'un coup qui fait un angle initial de $\theta_0$ avec l'horizontal. 
+Nous allons prendre les mêmes valeurs numériques qu'avant et $\theta_0=30\degree$. 
+
+\begin{enumerate}
+    \item Déterminer la durée $t$ du vol du ballon avant qu'il touche la mer. 
+    \item Déterminer à quelle distance $d$ par rapport au pied des falaise le ballon touchera l'eau. 
+    \item Déterminer la vitesse $v_B$ du ballon à l'instant $t_B$ juste avant de toucher l'eau.
+    \item Déterminer les valeurs numérique de $t$, $d$, $v_B$. 
+\end{enumerate}
+
+\begin{python}
+Développer un code qui demande à l'utilisateur de donner la hauteur de la falaise et la vitesse initiale, et donne : 
+\begin{enumerate}
+    \item la durée du vol.
+    \item la portée de la balle. 
+    \item la vitesse de la balle au moment de contact avec le sol/mer. 
+    \item tracer la trajectoire de la balle lors de son vol. 
+    \item $[$EXTRA$]$ Faire tout ca avec l'utilisateur qui donne la hauteur de la falaise, la vitesse initiale ET l'angle de la vitesse initiale. 
+\end{enumerate}
+\end{python}
+
+\section{Un coup franc devant un mur}
+Une footballeuse va frapper un coup franc devant un mur de défenseur. Le ballon au sol est situé à une distance $d$ du mur qui fait une hauteur uniforme $h$. Il frappe le ballon avec un angle de $\theta$. 
+
+Déterminer la vitesse \textit{minimum} de frappe nécessaire pour que le ballon dépasse le mur. 
+
+\begin{python}
+Développer un code qui demande à l'utilisateur de donner la hauteur du mur, et la norme de la vitesse initiale, et qui répond en disant si la balle dépasse le mur ou non, et si oui en donnant la hauteur de l'écart entre la balle et le haut du mur au moment où elle dépasse celui-ci. 
+\end{python}
+
+\textit{Données : $\theta=30\degree$, $h=2,0\; m$, $d=10,0\; m$}
+
+\section{Montée d'une pente}
+Considérer la situation suivante : une balle située sur une surface horizontale, au point $A$. Au point $B$ situé à une distance $d$ du point $A$ commence une surface inclinée faisant un angle $\theta$, qui monte jusqu'au point $C$ à un hauteur de $h$ par rapport au point $A$. 
+Pour le moment négligeons toute force de frottement. 
+\begin{enumerate}
+    \item Si la sphère possède une vitesse initiale $v_A$ au point $A$, déterminer la distance maximale $d_{max}$ qu'elle parcourt, selon la surface de la pente. 
+    \item Déterminer la vitesse initiale maximale $v_{A_{max}}$ possible pour que la sphère reste sur la pente. 
+    \end{enumerate}
+Nous allons refaire la même chose maintenant en supposant que le coefficient de frottement est $\mu$.
+\begin{enumerate}[resume]
+    \item Si la sphère possède une vitesse initiale $v_A'$ au point $A$, déterminer la distance maximale $d_{max}'$ qu'elle parcourt, selon la surface de la pente. 
+    \item Déterminer la vitesse initiale maximale $v_{A_{max}}'$ possible pour que la sphère reste sur la pente. 
+\end{enumerate}
+
+\textit{Données : $\theta=30\degree\;$, $v_A = 3,0\; \mps$, $d=2,0\; m$, $\mu=0,1$}
+
+
+\section{La portée d'un tir de canon}
+Un canon situé au sol au point $A$ tir une balle ayant une masse $m$ vers la droite à un angle $\theta$ par rapport à l'horizontal. Si la balle est envoyée avec une vitesse initiale $v_A$. 
+\begin{enumerate}
+    \item Déterminer l'expression de la portée de la balle. 
+    \item Déterminer la valeur numérique de la portée de la balle quand $\theta=60\degree$, $v_A=50 \mps$ et $m=50\; kg$
+    
+\end{enumerate}
+
+\begin{python}
+Développer un code pour tracer la trajectoire du tir du canon (matplotlib.pyplot), après avoir demander à l'utilisateur d'entrer la vitesse initiale ainsi que l'angle initial . 
+
+Puis, développer un code qui permet de visualiser sur le même graphique les différents tirs avec la même vitesse initiale et des angles initiaux différents, variant de $0\degree \To 90\degree$ tous les $5\degree$.  
+\end{python}
+
+\section{Un jeu de panier}
+Nous allons reprendre la situation décrite dans l'exercice précédent comme point de départ. Nous allons nous en servir comme tremplin pour lancer la sphère dans un panier. Situé à une distance $\ell$ par rapport au socle de la pente au point $D$ se situé un panier au point $P$. 
+Nous négligeons toute force de frottement. 
+
+\begin{enumerate}
+    \item  Déterminer la vitesse initiale $v_A$ que doit posséder la balle au départ au point $A$ pour qu'elle tombe dans le panier. 
+    \item Déterminer la valeur numérique de $v_A$. 
+\end{enumerate}
+
+Maintenant le panier se situe à une hauteur $h'$ par rapport au sol, au dessus du point $P$. 
+\begin{enumerate}[resume]
+    \item  Déterminer la vitesse initiale $v_A$ que doit posséder la balle au départ au point $A$ pour qu'elle tombe dans le panier. 
+    \item Déterminer la valeur numérique de $v_A$. 
+\end{enumerate}
+\textit{Données : $\theta=30 \degree \;$, $v_A = 3,0\; \mps$, $d=2,0\; m$, $\ell=5,0\; m$}
+
+
+
+\section{[Optionnel]Portée maximale d'un tir}
+
+On va reprendre l'idée de l'exercice précédent dans le but de trouver un résultat général sur la portée d'un projectile.
+Déterminer la valeur de l'angle initial qui produit la portée maximale du projectile dans les deux cas suivants : 
+\begin{enumerate}
+    \item Le projectile est lancé du point $A$, au sol, avec un angle initial $\theta$ et vitesse initiale $v_A$
+    \item Le projectile est lancée du point $B$ situé à une hauteur $h$ au-dessus du point $A$ au sol. 
+\end{enumerate}
+
+
+
+\end{document}

@@ -1,0 +1,195 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm]{geometry}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,varioref,times}
+\usepackage{gensymb}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\usepackage{xhfill}
+%pour ecrire en français avec les accents
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % load a font with all the characters
+\usepackage{units}
+
+% for writing code
+\usepackage{listings}
+\usepackage{minted}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%to resume numbering in a list
+\usepackage{enumitem}
+
+%Image-related packages
+\usepackage{wrapfig}
+\usepackage{float, graphicx}
+\graphicspath{ {./img/} }
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+
+
+%pour faire des cadres
+\usepackage{framed}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+
+% parametres des entete et de pieds de pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{SciPhy : 2nde}
+\rhead{Ch. 6bis : Gravitation}
+\chead{2019}
+\rfoot{Page \thepage}
+\lfoot{SZayyani}
+
+
+% pour ecrire sur +sieurs colonnes
+\usepackage{multicol}
+\setlength{\columnseprule}{0.25pt}
+\setlength{\columnsep}{60pt}
+
+% Fusion de lignes de tableaux.
+\usepackage{multirow}
+
+% Position verticale des lettres dans la ligne de tableau.
+\usepackage{array}
+
+
+% MATH -----------------------------------------------------------
+\newcommand{\To}{\longrightarrow}
+\newcommand{\gpl}{\; g\cdot L^{-1}}
+\newcommand{\gpmol}{\; g\cdot mol^{-1}}
+\newcommand{\mpl}{\; mol\cdot L^{-1}}
+\newcommand{\mps}{\; m\cdot s^{-1}}
+\newcommand{\mpss}{\; m\cdot s^{-2}}
+\newcommand{\es}[1]{\cdot10^{#1}}
+\newcommand{\eng}[1]{\textcolor{purple}{= #1}}
+\newenvironment{eg}
+ {\begin{shaded} \textbf{Exemples:} } { \end{shaded}}
+
+\newcounter{exo}
+\newenvironment{exo}
+ {\refstepcounter{exo} \begin{shaded}\noindent $\triangleright \quad$\textbf{Exercice: } } { \end{shaded}}    
+
+\newenvironment{defn}[1]
+ {\begin{leftbar}\noindent \textbf{Définition :\textit{ \quad #1} } } { \end{leftbar}} 
+\newenvironment{python}
+ {\begin{shaded} \textbf{A faire en PYTHON}\\ \itshape } { \end{shaded}}
+
+\definecolor{shadecolor}{gray}{0.9}
+% %%%%%%%%%%%%%%%%%%%%%for section headers with line goign to the end 
+
+\usepackage[explicit]{titlesec}
+    % Raised Rule Command:
+    % Arg 1 (Optional) - How high to raise the rule
+    % Arg 2 - Thickness of the rule
+    \newcommand{\raisedrulefill}[2][0ex]{\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+    \titleformat{\section}{\Large\bfseries}{\thesection. }{0em}{#1\,\raisedrulefill[0.4ex]{2pt}}
+    %%%%%%%%%%%%%%%%%
+\title{Corrigé PYTHON - mécanique newtonienne }
+\date{}
+\author{}
+
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{2mm}
+
+\begin{document}
+\maketitle
+
+\section{Choc entre deux boules}
+Voici donc le code pour le premier exo. 
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+
+m1 = float(input("Choisir la masse de la première boule (en kg) : "))
+m2 = float(input("Choisir la masse de la deuxième boule (en kg): "))
+u1 = float(input("Choisir la vitesse initiale de la première boule (en m/s) : "))
+v1 = float(input("Choisir la vitesse initiale de la deuxième boule (en m/s) : "))
+
+gauche = np.array([[m1,m2],[1,-1]])
+droite = np.array([m1*u1 + m2*v1, v1-u1])
+
+soln = np.linalg.solve(gauche, droite)
+
+u2 = soln[0]
+v2 = soln[1]
+
+print('u2 = ', u2)
+print('v2 = ', v2)
+
+\end{lstlisting}
+
+\section{Collision entre deux voitures (en deux dimensions)}
+
+Le principe ici c'est tout simplement une addition vectorielle des deux vecteur-vitesse des deux voitures pour donner le vecteur-vitesse de l'ensemble des deux voiture collées après la collision.
+
+\begin{lstlisting}[language=python]
+
+import math as m
+import numpy as np
+
+
+m1 = float(input("Choisir la masse du premier véhicule (en kg) : "))
+m2 = float(input("Choisir la masse du deuxième véhicule (en kg): "))
+u1 = float(input("Choisir la vitesse du premier véhicule (en m/s) : "))
+theta1 = float(input("Choisir l'angle du vecteur-vitesse du premier véhicule p/r à l'horizontal' (en degré) : "))
+u2 = float(input("Choisir la vitesse du deuxième véhicule (en m/s) : "))
+theta2 = float(input("Choisir l'angle du vecteur-vitesse du deuxième véhicule p/r à l'horizontal' (en degré) : "))
+
+#définissons les vecteurs vitesse
+
+v1 = np.array([u1*m.cos(theta1*m.pi/180),u1*m.sin(theta1*m.pi/180)])
+v2 = np.array([u2*m.cos(theta2*m.pi/180),u2*m.sin(theta2*m.pi/180)])
+m3 = m1 + m2
+
+v3 = 1/m3*(m1*v1 + m2*v2)
+
+print(v1)
+print(v2)
+print(v3)
+
+v3x = v3[0]
+v3y = v3[1]
+v3 = m.sqrt(v3x**2 + v3y**2)
+theta3 = np.arctan(v3y/v3x)*180/m.pi
+
+print('la composante x de v3 est ', v3x)
+print('la composante y de v3 est ', v3y)
+print('les deux voiture part avec une vitesse ', v3, ' avec un angle ',theta3, ' degré par rapport à horizontal')
+\end{lstlisting}
+
+
+
+
+\end{document}
